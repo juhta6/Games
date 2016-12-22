@@ -1,3 +1,8 @@
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    console.log(navigator.notification);
+}
+
 tabris.ui.set("toolbarVisible", false);
 var menu = new tabris.Page({
   topLevel: true
@@ -7,10 +12,11 @@ var page = new tabris.Page({
   topLevel: true
 }).on("appear", timer);
 //---------------------------------------------------------------------------------------------------------------------------
-var l,t,i,url,scale,time,hp,s,info,opened;
+var l,t,i,url,scale,time,hp,s,info,opened,livs;
 s = 0;
 hp = 5;
-info = "Welcome to the Games: Mobile edition. You shall get to know how the Games works and its goal in this introduction. First of all, you have 5 lives only and you need to be sharp and quick while playing the Games. You're supposed to collect coins by tapping them and beware bombs. The possibilty of a bomb to appear is 1 out of 10. Also there's 1 of 1000 chance to encounter a fake coin which is impossible to tell without touching a coin. You will lose 5 scores and a life each time you touch a bomb.";
+livs = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300];
+info = "Welcome to the Games: Mobile edition. You shall get to know how the Games works and its goal in this introduction. First of all, you have 5 lives only and you need to be sharp and quick while playing the Games. You're supposed to collect coins by tapping them and beware bombs. The possibilty of a bomb to appear is 1 out of 10. Also there's 1 of 1000 chance to encounter a fake coin which is impossible to tell without touching a coin. You will lose 5 scores and a life each time you touch a bomb. Do not forget, you will gain one life every 10 scores up to 300 :)";
 opened = false;
 
 navigator.notification.confirm(info, null, "Welcome-introductions", ["I understand."])
@@ -35,7 +41,7 @@ new tabris.Button({
   layoutData: {top: "prev()", centerX: 0, width: 240, height: 60},
   text: "Highscores",
   font: "24px"
-}).on("select", highscores).appendTo(menu);
+}).on("select", highscoress).appendTo(menu);
 
 var highscores = new tabris.Composite({
     id: "highscores",
@@ -50,8 +56,7 @@ var title = new tabris.TextView({
   centerX: 0, top: 10,
   text: "HIGHSCORES",
   font: "40px",
-  opacity: 0,
-  transform: {scaleX: 3, scaleY: 3}
+  opacity: 0
 }).appendTo(highscores);
 
 var list = new tabris.ScrollView({
@@ -59,7 +64,7 @@ var list = new tabris.ScrollView({
 }).appendTo(highscores);
 
 
-function highscores(){
+function highscoress(){
   if (opened == false){
   highscores.animate({transform: {translationY: 0}}, {duration: 1000})
   title.animate({opacity: 1}, {delay: 1000, duration: 500})
@@ -128,6 +133,7 @@ function random(){
       scores.set("text","Score: "+(s = s-5))
     } else {
       scores.set("text","Score: "+(s = 0))
+      liv = 0
     }
     if (hp >= 1){
       health.set("text", (hp = hp - 1) + " lives left")
@@ -139,6 +145,11 @@ function random(){
     }
     } else if (!BOMB == true){
       scores.set("text", "Score: "+(++s))
+      for(var live of livs){
+        if (s == live){
+    health.set("text", (++hp)+" lives left")
+        }
+  }
     if (!this.isDisposed()){
     this.dispose()
     }
@@ -166,6 +177,7 @@ function random(){
 function restart(){
   scores.set("text","Score: "+ (s = 0))
   health.set("text", (hp = 5) + " lives left")
+  liv = 0
   coins.set("text", i = 0)
   menu.open()
   page.find("#gameover").dispose();
@@ -174,6 +186,7 @@ function restart(){
 function gameover(){
           if (s == 0){
       scores.set("text","Score: "+ (s = 0))
+      liv = 0
           }
   new tabris.TextView({
     id: "gameover",
@@ -181,11 +194,11 @@ function gameover(){
     font: "bold 40px",
     text: "Game over! Your score: " + s,
     opacity: 0,
-    transform: {scaleX: 3, scaleY: 3},
     alignment: "center",
     transform: {translationY: -500}
   }).on("resize", function(){
     this.animate({opacity: 1, transform: {translationY: 0}}, {duration: 5000, easing: "ease-in-out"})
+    highscoress()
   }).on("tap", restart).appendTo(page);
 
 
