@@ -98,7 +98,7 @@ var scores = new tabris.TextView({
 }).appendTo(page);
 
 var coins = new tabris.TextView({
-  right: 5, top: 5,
+  right: 5, top: -20,
   text: i = 0,
   font: "0px"
 }).appendTo(page);
