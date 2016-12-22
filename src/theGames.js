@@ -50,7 +50,8 @@ var title = new tabris.TextView({
   centerX: 0, top: 10,
   text: "HIGHSCORES",
   font: "40px",
-  opacity: 0
+  opacity: 0,
+  transform: {scaleX: 3, scaleY: 3}
 }).appendTo(highscores);
 
 var list = new tabris.ScrollView({
@@ -180,6 +181,7 @@ function gameover(){
     font: "bold 40px",
     text: "Game over! Your score: " + s,
     opacity: 0,
+    transform: {scaleX: 3, scaleY: 3}
     alignment: "center",
     transform: {translationY: -500}
   }).on("resize", function(){
