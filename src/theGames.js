@@ -3,6 +3,10 @@ function onDeviceReady() {
     console.log(navigator.notification);
 }
 
+confirmed = function(buttonIndex) { if(buttonIndex == 1) { console.log("navigator.app.exitApp"); navigator.app.exitApp(); } }
+
+onTouch = function() { navigator.notification.confirm('', confirmed, 'Exit?'); }
+
 tabris.ui.set("toolbarVisible", false);
 var menu = new tabris.Page({
   topLevel: true
