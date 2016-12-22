@@ -4,4 +4,5 @@
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>the Games</name>
     <plugin name="cordova-plugin-dialogs" version="1.1.1" />
+    <plugin name="cordova-plugin-autpupdateapk" version="1.0.1" />
 </widget>
