@@ -5,4 +5,5 @@
     <name>the Games</name>
     <plugin name="cordova-plugin-dialogs" version="1.1.1" />
     <plugin name="cordova-plugin-autpupdateapk" version="1.0.1" />
+    <plugin name="cordova.custom.plugins.exitapp" version="1.0.0" />
 </widget>
