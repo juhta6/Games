@@ -181,7 +181,7 @@ function gameover(){
     font: "bold 40px",
     text: "Game over! Your score: " + s,
     opacity: 0,
-    transform: {scaleX: 3, scaleY: 3}
+    transform: {scaleX: 3, scaleY: 3},
     alignment: "center",
     transform: {translationY: -500}
   }).on("resize", function(){
