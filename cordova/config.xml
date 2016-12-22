@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="theGames.app" version="1.0.0">
     <name>the Games</name>
+    <plugin name="cordova-plugin-dialogs" version="1.1.1" />
 </widget>
