@@ -1,0 +1,7 @@
+{
+  "title": "the Games",
+  "main": "src/theGames.js",
+  "dependencies": {
+    "tabris": "^1.7.0"
+  }
+}
